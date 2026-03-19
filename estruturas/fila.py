@@ -1,28 +1,27 @@
-class Fila():
+from lista import Lista
+
+
+class Fila:
     def __init__(self):
-        self.fila = []
-    
+        self._fila = Lista()
 
     def is_empty(self):
-        return len(self._fila) == 0
-
+        return self._fila.is_empty()
 
     def ver_primeiro(self):
         if self.is_empty():
             return None
-        return self.fila[0]
-        
-    def enqueue(self,item):
-        self.fila.append(item)
+        return self._fila.acessar(0)
 
-        
+    def enqueue(self, item):
+        self._fila.adicionar(item)
 
     def dequeue(self):
         if self.is_empty():
             return None
-        item = self.fila[0]
-        self.fila.pop(0)
         
+        item = self._fila.acessar(0)
+        self._fila.remover(0)
         return item
 
 
