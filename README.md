@@ -96,6 +96,7 @@ src/
  │    └── dicionario.py
  │
  ├── modelos/
+ │    ├── cliente.py
  │    ├── produto.py
  │    ├── lote.py
  │    ├── pagamento.py
