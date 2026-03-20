@@ -88,22 +88,14 @@ O sistema é dividido nas seguintes entidades principais:
 ## 🚀 Estrutura do Projeto (planejada)
 
 ```
-src/
- ├── estruturas/
- │    ├── lista.py
- │    ├── fila.py
- │    ├── pilha.py
- │    └── dicionario.py
+
+ 
+ ├── Estrutura.py
  │
- ├── modelos/
- │    ├── cliente.py
- │    ├── produto.py
- │    ├── lote.py
- │    ├── pagamento.py
- │    └── consumo.py
+ ├── modelos.py
+ ├── persistencia.py
+ ├── logica.py
  │
- ├── sistema/
- │    └── cantina.py
  │
  └── main.py
 ```
