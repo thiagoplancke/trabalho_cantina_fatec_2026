@@ -2,7 +2,21 @@ from controle_de_estoque import Produto, Estoque
 from controle_de_consumo import Venda
 from estruturas import Lista
 
-historico_pagamento = Lista()
+
+
+from salvar_dados import carregar_dados, salvar_dados
+from gerar_dados import gerar_dados_fake
+
+dados_fake = carregar_dados()
+
+if dados_fake is None:
+    dados_fake = gerar_dados_fake()
+    salvar_dados(dados_fake)
+
+
+
+
+historico_pagamento = dados_fake
 
 estoque_produtos = Estoque()
 
@@ -39,18 +53,16 @@ while True:
 
         
         resultado = venda.vender()
-        if resultado == None:
-            print("Escolha outro produto")
-
-        else:    
-
+        if resultado is not None:
             historico_pagamento.adicionar(resultado)
+            salvar_dados(historico_pagamento)
 
 
 
     if opcao == "2":
 
-        print(historico_pagamento.percorrer())
-
+        for item in historico_pagamento.percorrer():
+            print(item)
+            
     if opcao == "0":
         break
