@@ -18,10 +18,16 @@ class Venda:
 
     def vender(self):
         if self.produto == None:
-            return "Produto não existe"
+            print("Produto não existe")
+
+            return
+             
         if self.quantidade_vendida > self.produto.quantidade:
-            return f"Estoque insuficiente"
-        self.produto.quantidade -= self.quantidade_vendida
+            print("Estoque insuficiente")
+
+            return
+
+        self.produto.quantidade = self.produto.quantidade - self.quantidade_vendida
         self.valor_total = self.produto.preco * self.quantidade_vendida
         pagamento = Pagamento(self.nome_comprador,self.categoria,self.curso,self.valor_total,self.data_hora)
         return pagamento

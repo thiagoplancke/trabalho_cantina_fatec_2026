@@ -9,6 +9,9 @@ class Produto:
         self.quantidade = quantidade
         self.validade = validade
 
+    def __repr__(self):
+        return f"Produto: {self.nome} | Preço: R${self.preco:.2f} | Abastecido: {self.data_compra} | Validade: {self.validade} | Quantidade: {self.quantidade} unidades"
+
 
 class Estoque:
     def __init__(self):
