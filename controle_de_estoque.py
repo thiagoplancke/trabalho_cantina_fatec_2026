@@ -13,7 +13,8 @@ class Produto:
 class Estoque:
     def __init__(self):
         self.estoque = Dicionario()
-        
+    
+
 
     def adicionar_produto(self,produto):
         self.estoque.adicionar(produto.nome,produto)
@@ -21,3 +22,6 @@ class Estoque:
     def pegar_produto_estoque(self,produto_nome):
 
         return self.estoque.buscar(produto_nome.lower())
+    
+    def ver_items_estoque(self):
+        return self.estoque.ver_items()

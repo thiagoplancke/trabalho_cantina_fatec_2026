@@ -92,6 +92,11 @@ class Dicionario:
             if par[0] == chave:
                 return par[1]
         return None
+    
+    def ver_items(self):
+        for i in range(self._dados.tamanho()):
+            item = self._dados.acessar(i)
+            print(item)
 
     def remover(self, chave):
         for i in range(self._dados.tamanho()):
