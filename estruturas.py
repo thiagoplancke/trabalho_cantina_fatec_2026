@@ -94,9 +94,11 @@ class Dicionario:
         return None
     
     def ver_items(self):
+        itens = Lista()
         for i in range(self._dados.tamanho()):
             item = self._dados.acessar(i)
-            print(item)
+            itens.adicionar(item)
+        return itens.percorrer()
 
     def remover(self, chave):
         for i in range(self._dados.tamanho()):

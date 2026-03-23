@@ -1,6 +1,9 @@
 from controle_de_estoque import Produto, Estoque
 from controle_de_consumo import Venda
 from estruturas import Lista
+from rich.table import Table
+from rich import print
+from rich.panel import Panel
 
 
 
@@ -30,12 +33,35 @@ estoque_produtos.adicionar_produto(coxinha)
 estoque_produtos.adicionar_produto(coca_cola)
 
 
+print("\n")
+print("\n")
+print("\n")
+print("\n")
+print("\n")
 
+
+inicio = Panel(title="CANTINA FATEC",renderable="Bem vindo(a) a CANTINA FATEC!\n\nPressione ENTER para entrar!",width=40)
+print(inicio)
+print("\n")
+print("\n")
+entrar = input()
+print("\n")
 
 while True:
-    print("Estoque: ")
+    menu = Table(title="Menu", show_lines=True)
 
-    estoque_produtos.ver_items_estoque()
+    menu.add_column("Produtos",justify="center")
+    menu.add_column("Preço",justify="center")
+    menu.add_column("Data de Abastecimento",justify="center")
+    menu.add_column("Data de Validade",justify="center")
+    menu.add_column("Quantidade", justify="center")
+
+
+    for i in estoque_produtos.ver_items_estoque():
+        menu.add_row(i[1].nome,f"R$ {i[1].preco:.2f}",i[1].data_compra,i[1].validade,str(i[1].quantidade))
+    
+    print(menu)
+    
 
     
     print("\n\n1 - Comprar\n2 - Historico de Compras\n0 - Sair")
@@ -61,8 +87,18 @@ while True:
 
     if opcao == "2":
 
+        historico = Table(title="Histórico de Vendas", show_lines=True)
+
+        historico.add_column("Nome",justify="left")
+        historico.add_column("Categoria",justify="center")
+        historico.add_column("Curso",justify="center")
+        historico.add_column("valor Gasto",justify="center")
+        historico.add_column("Data e Hora", justify="center")
+
+
         for item in historico_pagamento.percorrer():
-            print(item)
+            historico.add_row(item.nome,item.categoria,item.curso,f"R$ {item.valor:.2f}",item.data_hora)
+        print(historico)
             
     if opcao == "0":
         break
