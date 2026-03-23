@@ -1,7 +1,7 @@
-from controle_de_estoque import Produto, Estoque
-from controle_de_pagamento import Pagamento
+from controle.controle_de_estoque import Produto, Estoque
+from controle.controle_de_pagamento import Pagamento
 
-from estruturas import Lista
+from estrutura.estruturas import Lista
 
 
 

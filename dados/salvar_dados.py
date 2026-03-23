@@ -1,7 +1,7 @@
 import pickle
 import os
 
-ARQUIVO = "dados.pkl"
+ARQUIVO = "dados/dados.pkl"
 
 
 def salvar_dados(historico):

@@ -1,15 +1,15 @@
-from controle_de_estoque import Produto, Estoque
-from controle_de_consumo import Venda
+from controle.controle_de_estoque import Produto, Estoque
+from controle.controle_de_consumo import Venda
+from dados.salvar_dados import salvar_dados, carregar_dados
+from dados.gerar_dados import gerar_dados_fake
 from datetime import *
-from estruturas import Lista
+from estrutura.estruturas import Lista
 from rich.table import Table
 from rich import print
 from rich.panel import Panel
 
 
 
-from salvar_dados import carregar_dados, salvar_dados
-from gerar_dados import gerar_dados_fake
 
 dados_fake = carregar_dados()
 
@@ -25,7 +25,7 @@ historico_pagamento = dados_fake
 estoque_produtos = Estoque()
 
 
-estoque_produtos.adicionar_produto(Produto("coxinha", 6, "05/05/22", "15/03/22"))
+estoque_produtos.adicionar_produto(Produto("coxinha", 6, "05/05/22", "06/03/22"))
 estoque_produtos.adicionar_produto(Produto("coxinha", 6, "04/05/22", "12/03/22"))
 estoque_produtos.adicionar_produto(Produto("coxinha", 6, "03/05/22", "09/03/22"))
 
@@ -80,7 +80,7 @@ while True:
     
 
     
-    print("\n\n1 - Comprar\n2 - Historico de Compras\n3 - Ver estoque\n0 - Sair")
+    print("\n\n1 - Comprar\n2 - Historico de Compras\n0 - Sair")
     
     opcao = input("Digite uma opção: ")
 

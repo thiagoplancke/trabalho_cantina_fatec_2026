@@ -1,5 +1,5 @@
-from estruturas import Dicionario
-from estruturas import Lista
+from estrutura.estruturas import Dicionario
+from estrutura.estruturas import Lista
 from datetime import *
 
 class Produto:

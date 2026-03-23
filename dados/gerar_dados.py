@@ -1,6 +1,6 @@
 from faker import Faker
-from controle_de_pagamento import Pagamento
-from estruturas import Lista
+from controle.controle_de_pagamento import Pagamento
+from estrutura.estruturas import Lista
 import random
 
 fake = Faker("pt_BR")

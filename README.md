@@ -1,111 +1,131 @@
-# 🛒 Cantina Fatec — Sistema de Controle com Estruturas de Dados
+# 🛒 Cantina Fatec — Sistema de Controle de Estoque com Prioridade por Validade
 
 ## 📌 Descrição do Projeto
 
-Este projeto tem como objetivo simular o funcionamento de uma cantina universitária, permitindo o controle de:
+Este projeto simula o funcionamento de uma cantina universitária, permitindo o controle de:
 
 * 📦 Estoque de produtos perecíveis
-* 💳 Pagamentos realizados via PIX
-* 🛒 Consumo dos clientes (integração entre estoque e pagamento)
+* 💳 Registro de pagamentos
+* 🛒 Consumo dos clientes
 
-O foco principal é a implementação de **estruturas de dados próprias**, sem uso direto de estruturas built-in do Python no domínio da aplicação.
+O sistema prioriza automaticamente a venda de produtos com **menor data de validade**, seguindo a estratégia **FEFO (First Expire, First Out)**.
 
 ---
 
 ## 🎯 Objetivo Acadêmico
 
-O projeto foi desenvolvido para as disciplinas:
+Desenvolvido para as disciplinas:
 
 * Estrutura de Dados
-* Linguagem de Programação 2
+* Linguagem de Programação
 
 Com foco em:
 
-* Implementação de estruturas como lista, fila, pilha e dicionário
-* Aplicação prática dessas estruturas em um problema real
-* Separação de responsabilidades e organização de código
+* Implementação de estruturas de dados próprias
+* Aplicação prática em um problema real
+* Organização modular do código
 
 ---
 
 ## 🧠 Estruturas de Dados Utilizadas
 
-As seguintes estruturas foram implementadas manualmente:
+As estruturas foram implementadas manualmente:
 
-* **Lista** → base para armazenamento genérico
-* **Fila (FIFO)** → controle de produtos perecíveis (prioridade para os mais antigos)
-* **Pilha (LIFO)** → histórico de operações (opcional)
-* **Dicionário (Hash Map)** → busca eficiente de produtos e clientes
+* **Lista** → utilizada para armazenar produtos ordenados por validade
+* **Dicionário (Hash Map)** → utilizado para mapear produtos por nome
 
 ---
 
-## 🧩 Modelagem do Sistema
+## ⚙️ Lógica Principal (FEFO)
 
-O sistema é dividido nas seguintes entidades principais:
+Produtos com o mesmo nome são armazenados em uma lista ordenada por validade:
 
-* **Produto** → informações básicas do item
-* **Lote** → controle de validade e quantidade (produtos perecíveis)
-* **Estoque** → gerencia produtos e seus respectivos lotes
-* **Pagamento** → registro de transações realizadas
-* **Consumo** → relação entre cliente, produto e pagamento
+Exemplo:
+
+Coxinha:
+
+* vence dia 05
+* vence dia 10
+* vence dia 20
+
+Ao vender:
+→ sempre remove o primeiro da lista (produto mais próximo de vencer)
 
 ---
 
-## 🔄 Fluxo de Funcionamento
+## 🔄 Fluxo do Sistema
 
-1. Um cliente seleciona um produto
-2. O sistema verifica o estoque (priorizando os itens mais antigos)
-3. O produto é removido do estoque
-4. O pagamento é registrado
-5. O consumo é armazenado para controle e auditoria
+1. Produto é adicionado ao estoque
+2. O sistema insere o produto na posição correta (ordenado por validade)
+3. Cliente realiza uma compra
+4. O sistema remove o produto mais próximo de vencer
+5. O pagamento é registrado
 
 ---
 
 ## 📊 Funcionalidades
 
-* Cadastro e gerenciamento de produtos
+* Cadastro de produtos
 * Controle de estoque com prioridade por validade
-* Registro de pagamentos
-* Controle de consumo por cliente
-* Geração de relatórios de vendas e consumo
+* Registro de vendas
+* Histórico de pagamentos
 
 ---
 
-## 🧪 Geração e Persistência de Dados
+## 🧪 Dados e Persistência
 
-* Utilização da biblioteca **Faker** para geração de dados aleatórios
-* Persistência de dados utilizando **pickle**
-
----
-
-## ⚙️ Regras do Projeto
-
-* Não utilizar estruturas built-in diretamente na lógica do sistema
-* Implementar estruturas próprias com encapsulamento
-* Organização em classes com responsabilidades bem definidas
+* Dados podem ser gerados automaticamente
+* Persistência usando `pickle`
 
 ---
 
-## 🚀 Estrutura do Projeto (planejada)
+## 🚀 Como Executar o Projeto
 
+### 1. Clonar o repositório
+
+```bash
+git clone https://github.com/thiagoplancke/trabalho_cantina_fatec_2026.git
+cd SEU-REPOSITORIO
 ```
 
- 
- ├── Estrutura.py
- │
- ├── modelos.py
- ├── persistencia.py
- ├── logica.py
- │
- │
- └── main.py
+### 2. Criar ambiente virtual (opcional)
+
+```bash
+python -m venv venv
+venv\Scripts\activate
 ```
+
+### 3. Instalar dependências
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Executar o sistema
+
+```bash
+python main.py
+```
+
+---
+
+## 🧠 Conceito Importante
+
+O sistema utiliza o conceito:
+
+**FEFO (First Expire, First Out)**
+
+Isso garante que produtos com menor validade sejam vendidos primeiro, evitando desperdício.
+
+---
 
 ## 👨‍💻 Autor
 
-Projeto desenvolvido por Thiago Plancke estudante da Fatec Rio Claro como parte da avaliação acadêmica.
+Thiago Plancke
+Fatec Rio Claro
 
 ---
 
 ## 📅 Prazo
 
-Entrega final: 26 Março de 2026
+Entrega: 26 Março de 2026

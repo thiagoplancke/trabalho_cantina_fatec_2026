@@ -1,4 +1,4 @@
-from estruturas import Lista
+from estrutura.estruturas import Lista
 
 class Pagamento:
     def __init__(self, nome,categoria,curso,valor, data_hora):
