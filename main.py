@@ -1,5 +1,6 @@
 from controle_de_estoque import Produto, Estoque
 from controle_de_consumo import Venda
+from datetime import *
 from estruturas import Lista
 from rich.table import Table
 from rich import print
@@ -24,13 +25,11 @@ historico_pagamento = dados_fake
 estoque_produtos = Estoque()
 
 
-coxinha = Produto("cOxinhA",6,"13/05/22","15/03/22",5)
-coca_cola = Produto("coca cola",5,"12/03/22","15/03/22",7)
+estoque_produtos.adicionar_produto(Produto("coxinha", 6, "05/05/22", "15/03/22"))
+estoque_produtos.adicionar_produto(Produto("coxinha", 6, "04/05/22", "12/03/22"))
+estoque_produtos.adicionar_produto(Produto("coxinha", 6, "03/05/22", "09/03/22"))
 
 
-estoque_produtos.adicionar_produto(coxinha)
-
-estoque_produtos.adicionar_produto(coca_cola)
 
 
 print("\n")
@@ -58,13 +57,30 @@ while True:
 
 
     for i in estoque_produtos.ver_items_estoque():
-        menu.add_row(i[1].nome,f"R$ {i[1].preco:.2f}",i[1].data_compra,i[1].validade,str(i[1].quantidade))
+        nome_produto = i[0]
+        lista_produtos = i[1]
+
+        if lista_produtos.tamanho() > 0:
+            primeiro = lista_produtos.acessar(0)
+
+            preco = primeiro.preco
+            data_compra = primeiro.data_compra.strftime("%d/%m/%Y")
+            validade = primeiro.validade.strftime("%d/%m/%Y")
+            quantidade = lista_produtos.tamanho()
+
+            menu.add_row(
+                nome_produto,
+                f"R$ {preco:.2f}",
+                data_compra,
+                validade,
+                str(quantidade)
+            )
     
     print(menu)
     
 
     
-    print("\n\n1 - Comprar\n2 - Historico de Compras\n0 - Sair")
+    print("\n\n1 - Comprar\n2 - Historico de Compras\n3 - Ver estoque\n0 - Sair")
     
     opcao = input("Digite uma opção: ")
 
@@ -74,8 +90,8 @@ while True:
         categoria = input("Digite a sua categoria(Aluno/Professor) ")
         produto = input("Digite o nome do produto que deseja comprar: ")
         quantidade = int(input("Digite a quantidade do produto que deseja comprar: "))
-
-        venda = Venda(estoque_produtos.pegar_produto_estoque(produto),nome,categoria,curso,quantidade,"14/03/22")
+        hora = str(datetime.now().strftime('%d/%m/%Y %H:%M'))
+        venda = Venda(estoque_produtos.pegar_produto_estoque(produto),nome,categoria,curso,quantidade,hora)
 
         
         resultado = venda.vender()
@@ -99,6 +115,9 @@ while True:
         for item in historico_pagamento.percorrer():
             historico.add_row(item.nome,item.categoria,item.curso,f"R$ {item.valor:.2f}",item.data_hora)
         print(historico)
+        print("\n")
+        voltar = input("Aperte ENTER para voltar")
+
             
     if opcao == "0":
         break

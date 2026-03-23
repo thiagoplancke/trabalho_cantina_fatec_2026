@@ -10,6 +10,9 @@ class Lista:
     def adicionar(self, item):
         self._dados.append(item)
 
+    def inserir(self,index,produto):
+        self._dados.insert(index,produto)
+
     def remover(self, index=None):
         if self.is_empty():
             return None

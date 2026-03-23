@@ -1,17 +1,15 @@
 from estruturas import Dicionario
-
+from estruturas import Lista
+from datetime import *
 
 class Produto:
-    def __init__(self, nome, preco,data_compra,validade,quantidade):
+    def __init__(self, nome, preco,data_compra,validade):
         self.nome = nome.lower()
         self.preco = preco
-        self.data_compra = data_compra
-        self.quantidade = quantidade
-        self.validade = validade
+        self.data_compra = datetime.strptime(data_compra, "%d/%m/%y")
+        self.validade = datetime.strptime(validade, "%d/%m/%y")
 
-    def __repr__(self):
-        return f"Produto: {self.nome} | Preço: R${self.preco:.2f} | Abastecido: {self.data_compra} | Validade: {self.validade} | Quantidade: {self.quantidade} unidades"
-
+    
 
 class Estoque:
     def __init__(self):
@@ -19,8 +17,26 @@ class Estoque:
     
 
 
-    def adicionar_produto(self,produto):
-        self.estoque.adicionar(produto.nome,produto)
+    def adicionar_produto(self, produto):
+        lista_produto = self.estoque.buscar(produto.nome)
+
+        if lista_produto is None:
+            lista_produto = Lista()
+            lista_produto.adicionar(produto)
+            self.estoque.adicionar(produto.nome, lista_produto)
+        else:
+            inserido = False
+
+            for i in range(lista_produto.tamanho()):
+                atual = lista_produto.acessar(i)
+
+                if produto.validade < atual.validade:
+                    lista_produto.inserir(i, produto)
+                    inserido = True
+                    break
+
+            if not inserido:
+                lista_produto.adicionar(produto)
     
     def pegar_produto_estoque(self,produto_nome):
 

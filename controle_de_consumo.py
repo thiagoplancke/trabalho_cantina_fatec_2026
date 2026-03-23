@@ -17,21 +17,32 @@ class Venda:
 
 
     def vender(self):
-        if self.produto == None:
+        if self.produto is None:
             print("Produto não existe")
-
             return
-             
-        if self.quantidade_vendida > self.produto.quantidade:
+
+        if self.produto.tamanho() == 0:
+            print("Estoque vazio")
+            return
+
+        if self.quantidade_vendida > self.produto.tamanho():
             print("Estoque insuficiente")
-
             return
 
-        self.produto.quantidade = self.produto.quantidade - self.quantidade_vendida
-        self.valor_total = self.produto.preco * self.quantidade_vendida
-        pagamento = Pagamento(self.nome_comprador,self.categoria,self.curso,self.valor_total,self.data_hora)
+        valor_total = 0
+
+        for _ in range(self.quantidade_vendida):
+            item_removido = self.produto.remover(0)
+            valor_total += item_removido.preco
+
+        self.valor_total = valor_total
+
+        pagamento = Pagamento(
+            self.nome_comprador,
+            self.categoria,
+            self.curso,
+            self.valor_total,
+            self.data_hora
+        )
+
         return pagamento
-
-
-
-
