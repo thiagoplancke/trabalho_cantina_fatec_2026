@@ -77,39 +77,23 @@ class Fila:
 
 class Dicionario:
     def __init__(self):
-        self._dados = Lista()
+        self._dados = {}  # dict interno (resolve chave rápido)
 
     def adicionar(self, chave, valor):
-        for i in range(self._dados.tamanho()):
-            par = self._dados.acessar(i)
-            if par[0] == chave:
-                self._dados.remover(i)
-                self._dados.adicionar((chave, valor))
-                return
-        
-        self._dados.adicionar((chave, valor))
+        # aqui você pode decidir o tipo do valor
+        self._dados[chave] = valor
 
     def buscar(self, chave):
-        for i in range(self._dados.tamanho()):
-            par = self._dados.acessar(i)
-            if par[0] == chave:
-                return par[1]
-        return None
-    
-    def ver_items(self):
-        itens = Lista()
-        for i in range(self._dados.tamanho()):
-            item = self._dados.acessar(i)
-            itens.adicionar(item)
-        return itens.percorrer()
+        return self._dados.get(chave, None)
 
     def remover(self, chave):
-        for i in range(self._dados.tamanho()):
-            par = self._dados.acessar(i)
-            if par[0] == chave:
-                return self._dados.remover(i)
-        return None
+        return self._dados.pop(chave, None)
+
+    def ver_items(self):
+        itens = Lista()
+        for chave, valor in self._dados.items():
+            itens.adicionar((chave, valor))
+        return itens.percorrer()
 
     def is_empty(self):
-        return self._dados.is_empty()
-
+        return len(self._dados) == 0

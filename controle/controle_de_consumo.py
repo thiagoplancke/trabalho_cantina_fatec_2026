@@ -6,7 +6,7 @@ from estrutura.estruturas import Lista
 
 
 class Venda:
-    def __init__(self,produto,nome_comprador,categoria,curso, quantidade_vendida,data_hora, valor_total = 0):
+    def __init__(self,produto,nome_comprador,categoria,curso, quantidade_vendida,data_hora, n,valor_total = 0):
         self.produto = produto
         self.nome_comprador = nome_comprador
         self.quantidade_vendida = quantidade_vendida
@@ -14,6 +14,7 @@ class Venda:
         self.categoria = categoria
         self.curso = curso
         self.data_hora = data_hora
+        self.nome_produto = n
 
 
     def vender(self):
@@ -42,7 +43,8 @@ class Venda:
             self.categoria,
             self.curso,
             self.valor_total,
-            self.data_hora
+            self.data_hora,
+            self.nome_produto
         )
 
         return pagamento

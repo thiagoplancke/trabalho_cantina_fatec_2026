@@ -6,17 +6,38 @@ import random
 fake = Faker("pt_BR")
 
 
+PRODUTOS = [
+    {"nome": "coxinha", "preco": 6},
+    {"nome": "pastel", "preco": 7},
+    {"nome": "coca cola", "preco": 5},
+    {"nome": "suco", "preco": 4},
+]
+
+
 def gerar_dados_fake(quantidade=20):
     historico = Lista()
 
     for _ in range(quantidade):
-        nome = fake.name()
-        categoria = random.choice(["Aluno", "Professor", "Servidor"])
+        nome_cliente = fake.name()
+        categoria = random.choice(["Aluno", "Professor"])
         curso = random.choice(["IA", "ESG"])
-        valor = round(random.uniform(5, 30), 2)
+
+        produto = random.choice(PRODUTOS)
+        quantidade_comprada = random.randint(1, 3)
+
+        valor_total = produto["preco"] * quantidade_comprada
+
         data_hora = fake.date_time_this_year().strftime("%d/%m/%Y %H:%M")
 
-        pagamento = Pagamento(nome, categoria, curso, valor, data_hora)
+        pagamento = Pagamento(
+            nome_cliente,
+            categoria,
+            curso,
+            valor_total,
+            data_hora,
+            produto["nome"]
+        )
+
         historico.adicionar(pagamento)
 
     return historico
