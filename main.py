@@ -39,29 +39,49 @@ print("\n")
 print("\n")
 
 while True:
-    inicio = Panel(title="CANTINA FATEC",renderable="Bem vindo(a) a CANTINA FATEC!\n\nPressione 1 para entrar como ADM\nPressione 2 para entrar como cliente\n0 - Sair",width=40)
+    inicio = Panel(
+        "[bold green]Bem vindo(a) a CANTINA FATEC![/bold green]\n\n"
+        "[cyan]1[/cyan] → Entrar como ADM\n"
+        "[cyan]2[/cyan] → Entrar como cliente\n"
+        "[red]0[/red] → Sair",
+        title="[bold yellow]🍔 CANTINA FATEC[/bold yellow]",
+        border_style="bright_blue",
+        width=50)
+
     print(inicio)
     print("\n")
     print("\n")
-    entrar = str(input(": "))
+    entrar = str(input(">>> "))
     if entrar == "1":
         senha = "1234"
         usersenha = input("Digite a sua senha: ")
         if usersenha == senha:
             while True:
-                tela = Panel(title="CANTINA FATEC",renderable="Bem vindo(a) ADM\n1 - Histórico de compras\n2 - Relatório\n3 - Adicionar Produto\n 0 - Sair",width=40)
+                tela = Panel(
+                    "[bold green]Bem vindo(a) ADM[/bold green]\n\n"
+                    "[cyan]1[/cyan] → Histórico de compras\n"
+                    "[cyan]2[/cyan] → Relatório\n"
+                    "[cyan]3[/cyan] → Adicionar Produto\n"
+                    "[red]0[/red] → Sair",
+                    title="[bold yellow]🔐 ÁREA ADMIN[/bold yellow]",
+                    border_style="bright_magenta",
+                    width=50)
 
                 print(tela)
-                opcao = str(input(": "))
+                opcao = str(input(">>> "))
                 if opcao == "1":
-                    historico = Table(title="Histórico de Vendas", show_lines=True)
+                    historico = Table(
+                        title="📜 Histórico de Vendas",
+                        show_lines=True,
+                        header_style="bold magenta"
+                    )
 
-                    historico.add_column("Nome",justify="left")
-                    historico.add_column("Categoria",justify="center")
-                    historico.add_column("Curso",justify="center")
-                    historico.add_column("Produto", justify="center")
-                    historico.add_column("valor Gasto",justify="center")
-                    historico.add_column("Data e Hora", justify="center")
+                    historico.add_column("Nome", justify="left", style="cyan")
+                    historico.add_column("Categoria", justify="center", style="green")
+                    historico.add_column("Curso", justify="center", style="blue")
+                    historico.add_column("Produto", justify="center", style="yellow")
+                    historico.add_column("Valor", justify="center", style="bold green")
+                    historico.add_column("Data", justify="center", style="white")
 
                     print(historico_pagamento)
                     for item in historico_pagamento.percorrer():
@@ -89,11 +109,14 @@ while True:
                     if quantidade_vendas > 0:
                         ticket_medio = total / quantidade_vendas
 
-                    relatorio = Table(title="Relatório Geral", show_lines=True)
+                    relatorio = Table(
+                        title="📊 Relatório Geral",
+                        show_lines=True,
+                        header_style="bold yellow"
+                    )
 
-                    relatorio.add_column("Métrica", justify="left")
-                    relatorio.add_column("Valor", justify="center")
-
+                    relatorio.add_column("Métrica", justify="left", style="cyan")
+                    relatorio.add_column("Valor", justify="center", style="bold green")
 
                     relatorio.add_row("Total Faturado", f"R$ {total:.2f}")
                     relatorio.add_row("Quantidade de Vendas", str(quantidade_vendas))
@@ -125,20 +148,19 @@ while True:
                     break
 
 
-
-
-
-
     if entrar == "2":
         while True:
-            menu = Table(title="Menu", show_lines=True)
+            menu = Table(
+                title="🍽️ Cardápio",
+                show_lines=True,
+                header_style="bold blue"
+            )
 
-            menu.add_column("Produtos",justify="center")
-            menu.add_column("Preço",justify="center")
-            menu.add_column("Data de Abastecimento",justify="center")
-            menu.add_column("Data de Validade",justify="center")
-            menu.add_column("Quantidade", justify="center")
-
+            menu.add_column("Produto", justify="center", style="yellow")
+            menu.add_column("Preço", justify="center", style="green")
+            menu.add_column("Abastecimento", justify="center", style="cyan")
+            menu.add_column("Validade", justify="center", style="red")
+            menu.add_column("Qtd", justify="center", style="magenta")
 
             for i in estoque_produtos.ver_items_estoque():
                 nome_produto = i[0]
@@ -169,11 +191,11 @@ while True:
             opcao = input("Digite uma opção: ")
 
             if opcao == "1":
+                produto = input("Digite o nome do produto que deseja comprar: ")
+                quantidade = int(input("Digite a quantidade do produto que deseja comprar: "))
                 nome = input("Digite o seu nome: ")
                 curso = input("Digite o seu curso(IA/ESG): ")
                 categoria = input("Digite a sua categoria(Aluno/Professor) ")
-                produto = input("Digite o nome do produto que deseja comprar: ")
-                quantidade = int(input("Digite a quantidade do produto que deseja comprar: "))
                 hora = str(datetime.now().strftime('%d/%m/%Y %H:%M'))
                 venda = Venda(estoque_produtos.pegar_produto_estoque(produto),nome,categoria,curso,quantidade,hora,produto)
 

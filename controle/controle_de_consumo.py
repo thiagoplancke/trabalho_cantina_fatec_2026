@@ -1,5 +1,6 @@
 from controle.controle_de_estoque import Produto, Estoque
 from controle.controle_de_pagamento import Pagamento
+from rich import print
 
 from estrutura.estruturas import Lista
 
@@ -19,16 +20,17 @@ class Venda:
 
     def vender(self):
         if self.produto is None:
-            print("Produto não existe")
+            print("\n[bold red]❌ Produto não existe![/bold red]")
             return
 
         if self.produto.tamanho() == 0:
-            print("Estoque vazio")
+            print("\n[bold red]❌ Estoque vazio![/bold red]")
             return
 
         if self.quantidade_vendida > self.produto.tamanho():
-            print("Estoque insuficiente")
+            print(f"\n[bold yellow]⚠️ Estoque insuficiente! Disponível: {self.produto.tamanho()}[/bold yellow]")
             return
+
 
         valor_total = 0
 
