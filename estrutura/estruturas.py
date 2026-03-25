@@ -42,17 +42,12 @@ class Lista:
     
 
 
-
-
-
-
-
 class Dicionario:
     def __init__(self):
-        self._dados = {}  # dict interno (resolve chave rápido)
+        self._dados = {}  
 
     def adicionar(self, chave, valor):
-        # aqui você pode decidir o tipo do valor
+        
         self._dados[chave] = valor
 
     def buscar(self, chave):
