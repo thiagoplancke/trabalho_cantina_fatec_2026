@@ -25,10 +25,26 @@ historico_pagamento = dados_fake
 estoque_produtos = Estoque()
 
 
-estoque_produtos.adicionar_produto(Produto("coxinha", 6, "03/02/26", "06/03/26"))
-estoque_produtos.adicionar_produto(Produto("coxinha", 6, "09/02/26", "12/03/26"))
-estoque_produtos.adicionar_produto(Produto("coxinha", 6, "06/02/26", "26/03/26"))
+estoque_produtos.adicionar_produto(Produto("coxinha", 6, "10/03/26", "20/03/26"))  
+estoque_produtos.adicionar_produto(Produto("coxinha", 6, "15/03/26", "25/03/26"))  
+estoque_produtos.adicionar_produto(Produto("coxinha", 6, "20/03/26", "28/03/26"))
+estoque_produtos.adicionar_produto(Produto("coxinha", 6, "22/03/26", "30/03/26"))
 
+
+
+estoque_produtos.adicionar_produto(Produto("pastel", 7, "05/03/26", "18/03/26"))  
+estoque_produtos.adicionar_produto(Produto("pastel", 7, "18/03/26", "27/03/26"))
+estoque_produtos.adicionar_produto(Produto("pastel", 7, "21/03/26", "29/03/26"))
+
+
+
+estoque_produtos.adicionar_produto(Produto("coca cola", 5, "10/03/26", "26/03/26"))  
+estoque_produtos.adicionar_produto(Produto("coca cola", 5, "20/03/26", "10/04/26"))
+
+
+
+estoque_produtos.adicionar_produto(Produto("suco", 4, "18/03/26", "27/03/26"))
+estoque_produtos.adicionar_produto(Produto("suco", 4, "22/03/26", "02/04/26"))
 
 
 
