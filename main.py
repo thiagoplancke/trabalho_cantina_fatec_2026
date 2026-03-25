@@ -25,9 +25,9 @@ historico_pagamento = dados_fake
 estoque_produtos = Estoque()
 
 
-estoque_produtos.adicionar_produto(Produto("coxinha", 6, "05/05/22", "06/03/22"))
-estoque_produtos.adicionar_produto(Produto("coxinha", 6, "04/05/22", "12/03/22"))
-estoque_produtos.adicionar_produto(Produto("coxinha", 6, "03/05/22", "09/03/22"))
+estoque_produtos.adicionar_produto(Produto("coxinha", 6, "03/02/26", "06/03/26"))
+estoque_produtos.adicionar_produto(Produto("coxinha", 6, "09/02/26", "12/03/26"))
+estoque_produtos.adicionar_produto(Produto("coxinha", 6, "06/02/26", "26/03/26"))
 
 
 
@@ -62,6 +62,9 @@ while True:
                     "[cyan]1[/cyan] → Histórico de compras\n"
                     "[cyan]2[/cyan] → Relatório\n"
                     "[cyan]3[/cyan] → Adicionar Produto\n"
+                    "[cyan]4[/cyan] → Remover produto\n "
+                    "[cyan]5[/cyan] → Verificar produtos vencidos\n"
+                    "[cyan]6[/cyan] → Remover produtos vencidos\n "
                     "[red]0[/red] → Sair",
                     title="[bold yellow]🔐 ÁREA ADMIN[/bold yellow]",
                     border_style="bright_magenta",
@@ -140,6 +143,91 @@ while True:
                             estoque_produtos.adicionar_produto(Produto(nome_p, valor,data_a , data_co))
                     if quant == 1:
                         estoque_produtos.adicionar_produto(Produto(nome_p, valor,data_a , data_co))
+
+
+
+                if opcao == "4":
+                    nome = input("Digite o nome do produto: ").lower()
+
+                    lista = estoque_produtos.pegar_produto_estoque(nome)
+
+                    if lista is None or lista.tamanho() == 0:
+                        print("[bold red]❌ Produto não encontrado ou sem estoque[/bold red]")
+                        continue
+
+                    print(f"[yellow]Estoque atual: {lista.tamanho()}[/yellow]")
+
+                    try:
+                        qtd = int(input("Quantidade para remover: "))
+
+                        if qtd <= 0:
+                            print("[red]❌ Quantidade inválida[/red]")
+                            continue
+
+                        if qtd > lista.tamanho():
+                            print("[red]❌ Quantidade maior que o estoque[/red]")
+                            continue
+
+                    except:
+                        print("[red]❌ Digite um número válido[/red]")
+                        continue
+
+                    for _ in range(qtd):
+                        lista.remover(0)
+
+                    print("[green]✔ Estoque atualizado com sucesso[/green]")
+
+                if opcao == "5":
+                    hoje = datetime.now()
+                    encontrou = False
+
+                    tabela = Table(title="⚠️ Produtos Vencidos", show_lines=True)
+                    tabela.add_column("Produto", style="yellow")
+                    tabela.add_column("Validade", style="red")
+
+                    for nome, lista in estoque_produtos.ver_items_estoque():
+                        for i in range(lista.tamanho()):
+                            item = lista.acessar(i)
+
+                            if item.validade < hoje:
+                                tabela.add_row(
+                                    nome,
+                                    item.validade.strftime("%d/%m/%Y")
+                                )
+                                encontrou = True
+
+                    if encontrou:
+                        print(tabela)
+                    else:
+                        print("[green]✔ Nenhum produto vencido[/green]")
+
+                    input("\nENTER para voltar")
+
+
+
+                if opcao == "6":
+                    nome = input("Produto: ").lower()
+                    lista = estoque_produtos.pegar_produto_estoque(nome)
+
+                    if lista is None or lista.tamanho() == 0:
+                        print("[red]❌ Produto não encontrado[/red]")
+                        continue
+
+                    hoje = datetime.now()
+
+                    removidos = 0
+                    i = 0
+
+                    while i < lista.tamanho():
+                        item = lista.acessar(i)
+
+                        if item.validade < hoje:
+                            lista.remover(i)
+                            removidos += 1
+                        else:
+                            i += 1
+
+                    print(f"[green]✔ {removidos} produtos vencidos removidos[/green]")
 
 
 
